@@ -38,6 +38,39 @@ public class HouseSevrice {
 
         return true;
     }
+    //接受id  返回bool ，传入的id从1开始  下标要id-1
+    public boolean del(int delId) {
+        int index = -1;
+
+        //找到要删除的房屋信息
+           for(int i = 0; i <= houseNum - 1; i++)
+           {
+               //确认要删除的房屋信息
+               if(houses[i].getId() == delId)
+               {
+                   index = i;
+                   break;
+               }
+
+
+           }
+           //如果找到要删除的房屋信息
+           if (index == -1) {
+               return false;
+           }
+           else {
+               //遍历迁移房屋信息，从删除位置 开始
+               for(int i = index; i < houseNum - 1; i++)
+               {
+                   houses[i]= houses[i+1];
+               }
+               //现存最后一位删除，置为null
+               houses[--houseNum] = null;
+
+           }
+
+           return true;
+    }
 
 
 

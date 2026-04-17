@@ -36,7 +36,7 @@ public class HouseView {
                 System.out.println("查找房源");
                 break;
             case '3':
-                System.out.println("删除房源");
+                deleMenu();
                 break;
             case '4':
                 System.out.println("修改房源");
@@ -88,6 +88,35 @@ public class HouseView {
         } else {
             System.out.println("新增房源失败！");
         }
+
+
+        }
+        public void deleMenu(){
+        System.out.println("==========删除房源==========");
+        System.out.println("请输入要删除的房屋编号：(-1 退出)");
+        int id= Utility.readInt(5);//输入房屋编号通过调用dele实现
+         if(id == -1)
+         {
+             System.out.println("退出删除");
+                return;
+         }
+         //增加确认机制  方法 中将 y转为 Y
+            char choice = Utility.readConfirmSelection();
+            //如果选择不是Y，则取消删除，是Y接着执行
+            if (choice != 'Y') {
+                System.out.println("取消删除");
+                return;
+            }
+       //确认删除，调用houseService的del方法
+         if(houseService.del(id))
+         {
+             System.out.println("删除成功！");
+         }
+         else
+         {
+             System.out.println("删除失败！");
+         }
+
 
 
         }
