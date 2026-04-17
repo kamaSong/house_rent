@@ -1,11 +1,16 @@
 package com.ycj.house_rent.views;
 
 import com.ycj.house_rent.Utils.Utility;
+import com.ycj.house_rent.domain.House;
+import com.ycj.house_rent.service.HouseSevrice;
 
 public class HouseView {
     //1.完成主菜单的显示
+    //2.显示list菜单
     private boolean loop = true;
     private char key = ' ';
+    //引入houseService，调用其方法
+    private HouseSevrice houseService = new HouseSevrice(10);
     //显示主菜单
     public void mainMenu(){
         //循环显示
@@ -34,7 +39,7 @@ public class HouseView {
                 System.out.println("修改房源");
                 break;
             case '5':
-                System.out.println("房源列表");
+                listMenu();
                 break;
             case '6':
                 System.out.println("退出系统");
@@ -48,6 +53,17 @@ public class HouseView {
 
         }
 
+    }
+    //显示房源列表，通过调用houseService的list方法显示房源 ，注判断是否为空
+    public void listMenu(){
+        System.out.println("==========房屋列表==========");
+        System.out.println("编号\t\t房主\t\t电话\t\t地址\t\t月租\t\t状态");
+        House[] houses = houseService.list();//获取房屋数组
+        for (int i = 0; i < houses.length; i++) {
+            if (houses[i] != null) {
+                System.out.println(houses[i]);
+            }
+        }
     }
 
 
