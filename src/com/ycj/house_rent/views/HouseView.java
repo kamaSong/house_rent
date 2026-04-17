@@ -12,6 +12,7 @@ public class HouseView {
     //引入House类，创建house对象
     private House[] house =null;
 
+
     //引入houseService，调用其方法
     private HouseSevrice houseService = new HouseSevrice(10);
     //显示主菜单
@@ -33,22 +34,27 @@ public class HouseView {
                 addMenu();
                 break;
             case '2':
-                System.out.println("查找房源");
+                //查找房源
+                findMenu();
                 break;
             case '3':
                 deleMenu();
                 break;
             case '4':
-                System.out.println("修改房源");
+                updateMenu();
                 break;
             case '5':
                 listMenu();
                 break;
             case '6':
-                System.out.println("退出系统");
-                //将loop设置为false，退出循环
-                loop = false;
-                break;
+                //加退出确认机制
+                char choice = Utility.readConfirmSelection();
+                if (choice == 'Y') {
+                    loop = false;
+                   System.out.println("退出系统");
+                }
+              break;
+
             default:
                 System.out.println("输入错误，请重新输入：");
 
@@ -120,9 +126,80 @@ public class HouseView {
 
 
         }
+        //查找房源 思路 根据用户输入的编号，调用houseService的find方法，返回House对象，然后输出
+       public void findMenu(){
+        System.out.println("==========查找房源==========");
+        System.out.println("请输入要查找的房屋编号：(-1 退出)");
+        int id = Utility.readInt(5);
+        //判断是否为-1
+           if(id == -1)
+           {
+               System.out.println("退出查找");
+               return;
+           }
+           House findHouse =   houseService.findById(id);
+            if (findHouse != null) {
+                System.out.println("找到该房屋信息");
+                System.out.println("编号\t\t房主\t\t电话\t\t地址\t\t月租\t\t状态");
+                System.out.println(findHouse);
+
+            } else {
+                System.out.println("未找到该房屋信息");
+            }
+           //
+       }
 
 
+//修改房源
+      public void updateMenu(){
+        System.out.println("==========修改房源==========");
+        System.out.println("请输入要修改的房屋编号：(-1 退出)");
+        int id = Utility.readInt(5);
+        if(id == -1)
+        {
+            System.out.println("退出修改");
+            return;
+        }
+        House house = houseService.findById(id);
+        if (house != null) {
+            System.out.println("找到该房屋信息"+house);
+            System.out.println("请输入要修改的房屋信息：");
+            System.out.print("请输入房主姓名：");
+            //不改变则返回原值
+            String name = Utility.readString(8,house.getName());
+            System.out.print("请输入房主电话：");
+            //不改变则返回原值
+            String phone = Utility.readString(12,house.getPhone());
+            System.out.print("请输入房屋地址：");
+            //不改变则返回原值
+            String address = Utility.readString(16,house.getAddress());
+            System.out.print("请输入房屋月租：");
+            //不改变则返回原值
+                String rentg = Utility.readString(10,"");
+                if (!rentg.equals(""))
+                {
+                    //将字符串转换为整数
+                    house.setRent(Integer.parseInt(rentg));
+                }
+             //不改变则返回原值
+            System.out.print("请输入房屋状态：");
+            //不改变则返回原值
+            String state = Utility.readString(3,house.getState());
+            //修改
+            house.setName(name);
+            house.setPhone(phone);
+            house.setAddress(address);
+            house.setState(state);
+            System.out.println("修改成功！");
 
+
+        }
+        else
+        {
+            System.out.println("修改失败！");
+        }
+
+      }
 
     }
 

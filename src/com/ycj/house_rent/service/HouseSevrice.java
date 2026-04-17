@@ -71,6 +71,17 @@ public class HouseSevrice {
 
            return true;
     }
+    public House findById(int findId) {
+        for(int i =0 ;i<houseNum;i++)
+        {
+            if(houses[i].getId() == findId)
+            {
+                return houses[i];
+            }
+        }
+        //未找到
+        return null;
+    }
 
 
 
