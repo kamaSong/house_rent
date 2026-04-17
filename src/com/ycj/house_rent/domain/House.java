@@ -70,11 +70,11 @@ public class House {
     //重写toString方法
     @Override
     public String toString() {
-        return  id +"\t"+
-                name +"\t"+
-                phone +"\t"+
-                address +"\t"+
-                rent +"\t"+ state ;
+        return  id +"\t\t"+
+                name +"\t\t"+
+                phone +"\t\t"+
+                address +"\t\t"+
+                rent +"\t\t"+ state ;
 
     }
 }

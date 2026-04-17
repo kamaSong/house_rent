@@ -9,6 +9,9 @@ public class HouseView {
     //2.显示list菜单
     private boolean loop = true;
     private char key = ' ';
+    //引入House类，创建house对象
+    private House[] house =null;
+
     //引入houseService，调用其方法
     private HouseSevrice houseService = new HouseSevrice(10);
     //显示主菜单
@@ -27,7 +30,7 @@ public class HouseView {
         switch (key)
         {
             case '1':
-                System.out.println("新增房源");
+                addMenu();
                 break;
             case '2':
                 System.out.println("查找房源");
@@ -65,6 +68,34 @@ public class HouseView {
             }
         }
     }
+    //显示新增房源菜单，输入相关信息后调用houseService的add方法加入房屋信息
+    public void addMenu(){
+        System.out.println("==========新增房源==========");
+        System.out.print("请输入房主姓名：");
+        String name = Utility.readString(8);
+        System.out.print("请输入房主电话：");
+        String phone = Utility.readString(12);
+        System.out.print("请输入房屋地址：");
+        String address = Utility.readString(16);
+        System.out.print("请输入房屋月租：");
+        int rent = Utility.readInt(10);
+        System.out.print("请输入房屋状态：");
+        String state = Utility.readString(3);
+        //创建house对象,实现id自增 count++
+        House newHouse = new House(0, name, phone, address, rent, state);
+        if (houseService.add(newHouse)) {
+            System.out.println("新增房源成功！");
+        } else {
+            System.out.println("新增房源失败！");
+        }
 
 
-}
+        }
+
+
+
+
+    }
+
+
+

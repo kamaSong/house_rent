@@ -9,6 +9,8 @@ public class HouseSevrice {
     private House[] houses;
 
     private int houseNum = 0;
+    //id计数器
+    private static int idCounter = 0;
 
 
 
@@ -16,11 +18,25 @@ public class HouseSevrice {
    //创建房屋对象指定大小
     public HouseSevrice(int size) {
         houses = new House[size];
-        houses[0] = new House(1, "1", "1", "1", 1, "1");
     }
     //返回创建的房屋对象数组
     public House[] list() {
         return houses;
+    }
+
+    //
+    public boolean add(House newHouse) {
+        //判断数组是否已满
+        if (houseNum == houses.length) {
+            System.out.println("数组已满，无法添加");
+            return false;
+        }
+        //添加房屋信息,并返回true   先赋值在 houseNum++;
+        houses[houseNum++] = newHouse;
+        idCounter++;//id计数器加一
+        newHouse.setId(idCounter);//更新
+
+        return true;
     }
 
 
